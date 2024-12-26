@@ -10,13 +10,18 @@ import com.wipro.SpringSec.model.User;
 import com.wipro.SpringSec.service.UserService;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
-    @PostMapping
+
+    @PostMapping("register")
     public User addUser(@RequestBody User user) {
         user = userService.addUser(user);
         return user;
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody User user) {
+        return userService.verify(user);
     }
 }
